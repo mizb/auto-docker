@@ -12,3 +12,11 @@ services:
       - ./data:/aggregator/data
       - ./log:/log
       # - ./start.sh:/aggregator/start.sh
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 3600 opaochat
